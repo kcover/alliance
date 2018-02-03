@@ -39,14 +39,14 @@ public class RoutingSlipTest {
   @Before
   public void setUp() {
     this.routingSlip = new RoutingSlip();
-    TreTestUtility.createFileIfNecessary(
-        IMAGE_NO_TRE_NTF_FILENAME, TreTestUtility::createNitfImageNoTres);
-    TreTestUtility.createFileIfNecessary(
-        IMAGE_TRE_NTF_FILENAME, TreTestUtility::createNitfImageTres);
-    TreTestUtility.createFileIfNecessary(
-        NO_IMAGE_NO_TRE_NTF_FILENAME, TreTestUtility::createNitfNoImageNoTres);
-    TreTestUtility.createFileIfNecessary(
-        NO_IMAGE_TRE_NTF_FILENAME, TreTestUtility::createNitfNoImageTres);
+    TreUtilityTest.createFileIfNecessary(
+        IMAGE_NO_TRE_NTF_FILENAME, TreUtilityTest::createNitfImageNoTres);
+    TreUtilityTest.createFileIfNecessary(
+        IMAGE_TRE_NTF_FILENAME, TreUtilityTest::createNitfImageTres);
+    TreUtilityTest.createFileIfNecessary(
+        NO_IMAGE_NO_TRE_NTF_FILENAME, TreUtilityTest::createNitfNoImageNoTres);
+    TreUtilityTest.createFileIfNecessary(
+        NO_IMAGE_TRE_NTF_FILENAME, TreUtilityTest::createNitfNoImageTres);
   }
 
   @Test(expected = IllegalArgumentException.class)

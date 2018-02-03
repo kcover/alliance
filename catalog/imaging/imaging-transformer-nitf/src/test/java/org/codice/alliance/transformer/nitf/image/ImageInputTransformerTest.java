@@ -15,7 +15,7 @@ package org.codice.alliance.transformer.nitf.image;
 
 import static ddf.catalog.data.types.DateTime.END;
 import static ddf.catalog.data.types.DateTime.START;
-import static org.codice.alliance.transformer.nitf.TreTestUtility.createImageSegment;
+import static org.codice.alliance.transformer.nitf.TreUtilityTest.createImageSegment;
 import static org.codice.alliance.transformer.nitf.common.NitfHeaderAttribute.FILE_DATE_AND_TIME_CREATED_ATTRIBUTE;
 import static org.codice.alliance.transformer.nitf.common.NitfHeaderAttribute.FILE_DATE_AND_TIME_EFFECTIVE_ATTRIBUTE;
 import static org.codice.alliance.transformer.nitf.common.NitfHeaderAttribute.FILE_DATE_AND_TIME_MODIFIED_ATTRIBUTE;
@@ -55,7 +55,7 @@ import org.codice.alliance.catalog.core.api.types.Isr;
 import org.codice.alliance.transformer.nitf.MetacardFactory;
 import org.codice.alliance.transformer.nitf.NitfAttributeConverters;
 import org.codice.alliance.transformer.nitf.NitfTestCommons;
-import org.codice.alliance.transformer.nitf.TreTestUtility;
+import org.codice.alliance.transformer.nitf.TreUtilityTest;
 import org.codice.alliance.transformer.nitf.common.AimidbAttribute;
 import org.codice.alliance.transformer.nitf.common.IndexedPiaprdAttribute;
 import org.codice.alliance.transformer.nitf.common.NitfAttribute;
@@ -203,11 +203,11 @@ public class ImageInputTransformerTest {
     aimidb.add(new TreEntryImpl("RESERVED_2", "    ", "string"));
     aimidb.add(new TreEntryImpl("LOCATION", location, "string"));
     aimidb.add(new TreEntryImpl("RESERVED_3", "             ", "string"));
-    ImageSegment imageSegment = TreTestUtility.createImageSegment();
+    ImageSegment imageSegment = TreUtilityTest.createImageSegment();
     imageSegment.getTREsRawStructure().add(aimidb);
 
     new NitfCreationFlowImpl()
-        .fileHeader(() -> TreTestUtility.createFileHeader())
+        .fileHeader(() -> TreUtilityTest.createFileHeader())
         .imageSegment(() -> imageSegment)
         .write(file.getAbsolutePath());
 
@@ -319,10 +319,10 @@ public class ImageInputTransformerTest {
     atextEntry.addGroup(atextGroup);
     piaprd.add(atextEntry);
 
-    ImageSegment imageSegment = TreTestUtility.createImageSegment();
+    ImageSegment imageSegment = TreUtilityTest.createImageSegment();
     imageSegment.getTREsRawStructure().add(piaprd);
     new NitfCreationFlowImpl()
-        .fileHeader(() -> TreTestUtility.createFileHeader())
+        .fileHeader(() -> TreUtilityTest.createFileHeader())
         .imageSegment(() -> imageSegment)
         .write(file.getAbsolutePath());
 
@@ -426,7 +426,7 @@ public class ImageInputTransformerTest {
     csexra.add(new TreEntryImpl("LINEAR_ERR", "000", "string"));
 
     ImageSegment imageSegment = ImageSegmentFactory.getDefault(FileType.NITF_TWO_ONE);
-    imageSegment.addImageBand(TreTestUtility.createImageBand());
+    imageSegment.addImageBand(TreUtilityTest.createImageBand());
 
     imageSegment.getTREsRawStructure().add(csexra);
     new NitfCreationFlowImpl()
@@ -460,7 +460,7 @@ public class ImageInputTransformerTest {
     piaimc.add(new TreEntryImpl("SATTRACK_ROW", "0000", "string"));
 
     ImageSegment imageSegment = ImageSegmentFactory.getDefault(FileType.NITF_TWO_ONE);
-    imageSegment.addImageBand(TreTestUtility.createImageBand());
+    imageSegment.addImageBand(TreUtilityTest.createImageBand());
 
     imageSegment.getTREsRawStructure().add(piaimc);
     new NitfCreationFlowImpl()
@@ -503,7 +503,7 @@ public class ImageInputTransformerTest {
     piatgb.add(new TreEntryImpl("TGTLON", "+149.12447 ", "float"));
 
     ImageSegment imageSegment = ImageSegmentFactory.getDefault(FileType.NITF_TWO_ONE);
-    imageSegment.addImageBand(TreTestUtility.createImageBand());
+    imageSegment.addImageBand(TreUtilityTest.createImageBand());
 
     imageSegment.getTREsRawStructure().add(piatgb);
     new NitfCreationFlowImpl()
@@ -590,7 +590,7 @@ public class ImageInputTransformerTest {
   private static void createNitfWithDifferentImageDateTimes(
       File file, DateTime fileDateTime, DateTime... imageDateTimes) {
     NitfCreationFlow nitfCreationFlow =
-        new NitfCreationFlowImpl().fileHeader(() -> TreTestUtility.createFileHeader(fileDateTime));
+        new NitfCreationFlowImpl().fileHeader(() -> TreUtilityTest.createFileHeader(fileDateTime));
     Arrays.stream(imageDateTimes)
         .forEach(
             imageDateTime ->

@@ -30,7 +30,7 @@ import java.util.function.Supplier;
 import org.codice.alliance.catalog.core.api.types.Security;
 import org.codice.alliance.transformer.nitf.MetacardFactory;
 import org.codice.alliance.transformer.nitf.NitfTestCommons;
-import org.codice.alliance.transformer.nitf.TreTestUtility;
+import org.codice.alliance.transformer.nitf.TreUtilityTest;
 import org.codice.alliance.transformer.nitf.image.ImageMetacardType;
 import org.codice.imaging.nitf.core.header.NitfHeader;
 import org.codice.imaging.nitf.core.security.FileSecurityMetadata;
@@ -64,10 +64,10 @@ public class NitfHeaderTransformerTest {
     NitfTestCommons.setupNitfUtilities(originalNitfValue, Arrays.asList("USA", "CAN"));
     File nitfFile = temporaryFolder.newFile("nitf-attribute-header-test.ntf");
 
-    FileSecurityMetadata fileSecurityMetadata = TreTestUtility.createSecurityMetadata();
+    FileSecurityMetadata fileSecurityMetadata = TreUtilityTest.createSecurityMetadata();
     when(fileSecurityMetadata.getSecurityClassificationSystem()).thenReturn(originalNitfValue);
 
-    Supplier<NitfHeader> nitfHeader = () -> TreTestUtility.createFileHeader(fileSecurityMetadata);
+    Supplier<NitfHeader> nitfHeader = () -> TreUtilityTest.createFileHeader(fileSecurityMetadata);
     new NitfCreationFlowImpl().fileHeader(nitfHeader).write(nitfFile.getAbsolutePath());
 
     Metacard metacard;

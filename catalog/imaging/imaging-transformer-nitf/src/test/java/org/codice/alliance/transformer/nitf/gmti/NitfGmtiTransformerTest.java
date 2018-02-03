@@ -45,7 +45,7 @@ import java.util.Set;
 import java.util.TimeZone;
 import org.codice.alliance.transformer.nitf.MetacardFactory;
 import org.codice.alliance.transformer.nitf.NitfTestCommons;
-import org.codice.alliance.transformer.nitf.TreTestUtility;
+import org.codice.alliance.transformer.nitf.TreUtilityTest;
 import org.codice.alliance.transformer.nitf.common.NitfAttribute;
 import org.codice.alliance.transformer.nitf.common.NitfHeaderTransformer;
 import org.codice.imaging.nitf.core.common.NitfFormatException;
@@ -76,7 +76,7 @@ public class NitfGmtiTransformerTest {
     this.nitfGmtiTransformer = new NitfGmtiTransformer();
     this.nitfGmtiTransformer.setGeometryFactory(new GeometryFactory());
 
-    TreTestUtility.createFileIfNecessary(GMTI_TEST_NITF, TreTestUtility::createNitfNoImageTres);
+    TreUtilityTest.createFileIfNecessary(GMTI_TEST_NITF, TreUtilityTest::createNitfNoImageTres);
     NitfTestCommons.setupNitfUtilities("US", Collections.singletonList("USA"));
   }
 
