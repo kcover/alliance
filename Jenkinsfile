@@ -13,13 +13,7 @@ pipeline {
         timestamps()
         skipDefaultCheckout()
     }
-    triggers {
-        /*
-          Restrict nightly builds to master branch, all others will be built on change only.
-          Note: The BRANCH_NAME will only work with a multi-branch job using the github-branch-source
-        */
-        cron(BRANCH_NAME == "master" ? "H H(19-21) * * *" : "")
-    }
+
     environment {
         DOCS = 'distribution/docs'
         ITESTS = 'distribution/test/itests/test-itests-alliance'
@@ -183,7 +177,7 @@ pipeline {
             when {
               allOf {
                 expression { env.CHANGE_ID == null }
-                expression { env.BRANCH_NAME ==~ /((?:\d*\.)?\d.x|master)/ }
+                expression { false }
                 environment name: 'JENKINS_ENV', value: 'prod'
               }
             }
