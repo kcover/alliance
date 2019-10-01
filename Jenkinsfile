@@ -3,7 +3,7 @@
 pipeline {
     agent {
         node {
-            label 'linux-medium'
+            label 'av-test'
             customWorkspace "/jenkins/workspace/${JOB_NAME}/${BUILD_NUMBER}"
         }
     }
@@ -28,6 +28,7 @@ pipeline {
         DISABLE_DOWNLOAD_PROGRESS_OPTS = '-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn '
         LINUX_MVN_RANDOM = '-Djava.security.egd=file:/dev/./urandom'
         COVERAGE_EXCLUSIONS = '**/test/**/*,**/itests/**/*,**/*Test*,**/sdk/**/*,**/*.js,**/node_modules/**/*,**/jaxb/**/*,**/wsdl/**/*,**/nces/sws/**/*,**/*.adoc,**/*.txt,**/*.xml'
+        WORKSPACE = '/jenkins/workspace/${env.JOB_NAME}/${env.BUILD_NUMBER}'
     }
     stages {
         stage('Setup') {
@@ -166,6 +167,13 @@ pipeline {
                     }
                 }
             }
+        }
+        stage('Virus Scan') {
+          steps {
+            script {
+              sh 'freshclam && clamscan -r $WORKSPACE'
+            }
+          }
         }
         /*
           Deploy stage will only be executed for deployable branches. These include master and any patch branch matching M.m.x format (i.e. 2.10.x, 2.9.x, etc...).
