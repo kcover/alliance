@@ -797,6 +797,15 @@
                                 <suppressionFile>dependency-check-maven-config.xml</suppressionFile>
                             </suppressionFiles>
                             <skipTestScope>true</skipTestScope>
+
+                            <!-- The following properties enable using a centralized nvd server -->
+                            <autoUpdate>${owasp.autoUpdate}</autoUpdate>
+                            <databaseDriverName>${owasp.database.driverName}
+                            </databaseDriverName>
+                            <connectionString>${owasp.database.url}</connectionString>
+                            <serverId>${owasp.serverId}</serverId>
+                            <!-- End Centralized NVD Server Configuration -->
+
                             <!--Disable by plugin maintainer recommendation on https://github.com/jeremylong/DependencyCheck/issues/978#issuecomment-349620687-->
                             <centralAnalyzerEnabled>false</centralAnalyzerEnabled>
                             <!--Disable because we have a separate NSP analysis step and this plugin has no way to suppress NSP issues as of 3.0.2-->
