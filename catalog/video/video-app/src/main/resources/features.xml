@@ -16,21 +16,20 @@
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xsi:schemaLocation="http://karaf.apache.org/xmlns/features/v1.3.0 http://karaf.apache.org/xmlns/features/v1.3.0">
 
+    <repository>mvn:org.codice.alliance.security/security-app/${project.version}/xml/features</repository>
+
     <feature name="mpegts-stream" version="${project.version}"
              description="Consume UDP MPEG-TS Stream">
-        <feature>video-app</feature>
         <feature>security-classification-service</feature>
         <feature>catalog-core-impl</feature>
-        <bundle>mvn:org.codice.alliance.video/video-mpegts-transformer/${project.version}
-        </bundle>
+        <feature>mpegts-input-transformer</feature>
         <bundle>mvn:org.codice.alliance.video/video-mpegts-stream/${project.version}</bundle>
-        <bundle>mvn:org.codice.alliance.video/video-admin-plugin/${project.version}</bundle>
     </feature>
 
     <feature name="mpegts-input-transformer" version="${project.version}"
              description="Transform MPEG-TS Files">
-        <feature>video-app</feature>
         <feature>security-classification-service</feature>
+        <feature>catalog-transformer-tika</feature>
         <bundle>mvn:org.codice.alliance.video/video-mpegts-transformer/${project.version}
         </bundle>
         <configfile finalname="/etc/DDF_Custom_Mime_Type_Resolver-mpegts.config">
@@ -38,9 +37,10 @@
         </configfile>
     </feature>
 
-    <feature name="video-app" version="${project.version}"
-             description="The Video Application provides support for ingesting and searching for MPEG-TS products.::Video">
-        <feature>catalog-app</feature>
+
+    <feature name="video-core" version="${project.version}"
+             description="Provides core requirements for ingesting and searching for MPEG-TS products. Excludes UI components.">
+        <feature>catalog-core</feature>
         <feature>catalog-core-validator</feature>
         <feature>catalog-core-definitionparser</feature>
         <feature>security-classification-service</feature>
@@ -54,7 +54,13 @@
         <bundle>mvn:org.codice.alliance/klv/${project.version}</bundle>
         <bundle>mvn:org.codice.alliance.video/video-security/${project.version}</bundle>
         <feature>mpegts-stream</feature>
-        <feature>mpegts-input-transformer</feature>
     </feature>
 
+    <feature name="video-app" version="${project.version}"
+             description="The Video Application provides support for ingesting and searching for MPEG-TS products.::Video">
+        <feature>catalog-app</feature>
+        <feature>video-core</feature>
+        <!-- mpegts-stream admin UI plugin -->
+        <bundle>mvn:org.codice.alliance.video/video-admin-plugin/${project.version}</bundle>
+    </feature>
 </features>
