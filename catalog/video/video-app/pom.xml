@@ -83,6 +83,13 @@
             <artifactId>klv</artifactId>
             <version>${ddf.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.codice.alliance.security</groupId>
+            <artifactId>security-app</artifactId>
+            <version>${project.version}</version>
+            <type>xml</type>
+            <classifier>features</classifier>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
